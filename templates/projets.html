@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Projets</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <h1>Mes projets</h1>
+
+    {{range .}}
+    <p><a href="/projects/{{.ID}}">{{.Titre}}</a></p>
+    {{end}}
+</body>
+</html>
