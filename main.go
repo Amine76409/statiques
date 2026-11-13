@@ -44,3 +44,19 @@ func detail(w http.ResponseWriter, r *http.Request) {
 	}
 	page404(w)
 }
+
+func main() {
+	contenu, _ := os.ReadFile("data/projects.json")
+	json.Unmarshal(contenu, &projets)
+
+	http.HandleFunc("/", accueil)
+	http.HandleFunc("/projects", liste)
+	http.HandleFunc("/projects/", detail)
+
+	fichiers := http.FileServer(http.Dir("."))
+	http.Handle("/css/", fichiers)
+	http.Handle("/images/", fichiers)
+	http.Handle("/cv/", fichiers)
+
+	http.ListenAndServe(":8080", nil)
+}
