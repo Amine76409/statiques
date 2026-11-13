@@ -29,3 +29,18 @@ func accueil(w http.ResponseWriter, r *http.Request) {
 	}
 	afficher(w, "index.html", nil)
 }
+
+func liste(w http.ResponseWriter, r *http.Request) {
+	afficher(w, "projets.html", projets)
+}
+
+func detail(w http.ResponseWriter, r *http.Request) {
+	id := strings.TrimPrefix(r.URL.Path, "/projects/")
+	for _, p := range projets {
+		if p.ID == id {
+			afficher(w, "projet.html", p)
+			return
+		}
+	}
+	page404(w)
+}
